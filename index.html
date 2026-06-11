@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mauro Ponce is a Ruby on Rails Tech Lead and Software Engineer based in Buenos Aires, Argentina.">
+  <meta name="theme-color" content="#0f172a">
+  <title>Mauro Ponce</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(30, 41, 59, 0.5);
+      --panel-border: rgba(148, 163, 184, 0.1);
+      --text: #94a3b8;
+      --muted: #64748b;
+      --heading: #e2e8f0;
+      --accent: #5eead4;
+      --accent-soft: rgba(45, 212, 191, 0.1);
+      --focus: #f8e16c;
+      --max: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.08), transparent 34rem),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      content: "";
+      background: radial-gradient(
+        600px circle at var(--spotlight-x, 0) var(--spotlight-y, 0),
+        rgba(29, 78, 216, 0.15),
+        transparent 80%
+      );
+      transition: opacity 180ms ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--accent);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      z-index: 10;
+      transform: translateY(-150%);
+      border-radius: 4px;
+      background: var(--focus);
+      color: #0f172a;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 160ms ease;
+    }
+
+    .skip-link:focus-visible {
+      transform: translateY(0);
+      color: #0f172a;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(100%, var(--max));
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 0 6rem;
+    }
+
+    .layout {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex: 0 0 48%;
+      max-height: 100vh;
+      min-height: 100vh;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6rem 0;
+    }
+
+    .intro h1 {
+      margin: 0;
+      color: var(--heading);
+      font-size: clamp(2.65rem, 6vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .intro h2 {
+      margin: 1rem 0 0;
+      color: var(--heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .intro p {
+      max-width: 20rem;
+      margin-top: 1rem;
+      line-height: 1.55;
+    }
+
+    .nav {
+      margin-top: 4rem;
+    }
+
+    .nav ul,
+    .social-list,
+    .timeline,
+    .tag-list,
+    .project-list,
+    .related-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      padding: 0.75rem 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-link::before {
+      display: block;
+      width: 2rem;
+      height: 1px;
+      margin-right: 1rem;
+      background: var(--muted);
+      content: "";
+      transition: width 160ms ease, background-color 160ms ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible,
+    .nav-link.active {
+      color: var(--heading);
+    }
+
+    .nav-link:hover::before,
+    .nav-link:focus-visible::before,
+    .nav-link.active::before {
+      width: 4rem;
+      background: var(--heading);
+    }
+
+    .social-list {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-left: 0.125rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.625rem;
+      height: 1.625rem;
+      color: var(--text);
+    }
+
+    .social-link svg {
+      display: block;
+      width: 1.5rem;
+      height: 1.5rem;
+      fill: currentColor;
+    }
+
+    main {
+      flex: 0 0 52%;
+      padding: 6rem 0;
+    }
+
+    .section {
+      margin-bottom: 9rem;
+      scroll-margin-top: 6rem;
+    }
+
+    .section-heading {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: none;
+      margin: 0 0 1.5rem;
+      padding: 1.25rem 0;
+      background: rgba(15, 23, 42, 0.86);
+      color: var(--heading);
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .prose p + p {
+      margin-top: 1rem;
+    }
+
+    .prose a,
+    footer a {
+      color: var(--heading);
+      font-weight: 600;
+    }
+
+    .prose a:hover,
+    .prose a:focus-visible,
+    footer a:hover,
+    footer a:focus-visible {
+      color: var(--accent);
+    }
+
+    .timeline,
+    .project-list {
+      position: relative;
+    }
+
+    .timeline:hover .item,
+    .project-list:hover .project-card {
+      opacity: 0.55;
+    }
+
+    .timeline .item:hover,
+    .project-list .project-card:hover,
+    .timeline .item:focus-within,
+    .project-list .project-card:focus-within {
+      opacity: 1;
+    }
+
+    .item,
+    .project-card {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+      padding-bottom: 0.25rem;
+      transition: opacity 160ms ease;
+    }
+
+    .item {
+      grid-template-columns: minmax(7.25rem, 0.95fr) minmax(0, 3.05fr);
+    }
+
+    .item + .item,
+    .project-card + .project-card {
+      margin-top: 3rem;
+    }
+
+    .item::before,
+    .project-card::before {
+      position: absolute;
+      inset: -1rem -1.5rem;
+      z-index: -1;
+      display: block;
+      border-radius: 8px;
+      background: transparent;
+      box-shadow: none;
+      content: "";
+      transition: background-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .item:hover::before,
+    .item:focus-within::before,
+    .project-card:hover::before,
+    .project-card:focus-within::before {
+      background: var(--panel);
+      box-shadow: inset 0 1px 0 0 var(--panel-border), 0 14px 36px rgba(2, 6, 23, 0.22);
+    }
+
+    .date {
+      margin-top: 0.2rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    .item h3,
+    .project-card h3 {
+      margin: 0;
+      color: var(--heading);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .role-stack {
+      margin-top: 0.125rem;
+      color: var(--muted);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .item p,
+    .project-card p {
+      margin-top: 0.75rem;
+      font-size: 0.925rem;
+      line-height: 1.55;
+    }
+
+    .external {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.3rem;
+    }
+
+    .external .arrow {
+      display: inline-block;
+      font-size: 0.9em;
+      line-height: 1;
+      transition: transform 160ms ease;
+    }
+
+    .external:hover .arrow,
+    .external:focus-visible .arrow {
+      transform: translate(0.18rem, -0.18rem);
+    }
+
+    .related-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 0.9rem;
+      margin-top: 0.9rem;
+      font-size: 0.875rem;
+    }
+
+    .related-links a {
+      color: var(--text);
+    }
+
+    .related-links a::before {
+      color: var(--muted);
+      content: "#";
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.65rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 0.2rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .resume-link,
+    .archive-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 3rem;
+      color: var(--heading);
+      font-weight: 700;
+    }
+
+    .resume-link .arrow,
+    .archive-link .arrow {
+      display: inline-block;
+      margin-left: 0.4rem;
+      transition: transform 160ms ease;
+    }
+
+    .resume-link:hover .arrow,
+    .resume-link:focus-visible .arrow,
+    .archive-link:hover .arrow,
+    .archive-link:focus-visible .arrow {
+      transform: translateX(0.25rem);
+    }
+
+    .project-card {
+      grid-template-columns: minmax(0, 2fr) minmax(7rem, 1fr);
+      align-items: start;
+      gap: 1.5rem;
+    }
+
+    .project-copy {
+      min-width: 0;
+      order: 2;
+    }
+
+    .project-thumb {
+      position: relative;
+      display: block;
+      order: 1;
+      width: 100%;
+      min-width: 7rem;
+      overflow: hidden;
+      border: 2px solid rgba(226, 232, 240, 0.1);
+      border-radius: 6px;
+      aspect-ratio: 16 / 10;
+      background: #172554;
+      transition: border-color 160ms ease, transform 160ms ease;
+    }
+
+    .project-card:hover .project-thumb,
+    .project-card:focus-within .project-thumb {
+      border-color: rgba(226, 232, 240, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .project-thumb::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+    }
+
+    .project-video::before,
+    .project-image::before {
+      display: none;
+    }
+
+    .project-video video,
+    .project-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-course::before {
+      background:
+        linear-gradient(135deg, rgba(94, 234, 212, 0.32), transparent 48%),
+        linear-gradient(0deg, rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.1)),
+        #19324a;
+    }
+
+    .thumb-course::after,
+    .thumb-site::after {
+      position: absolute;
+      left: 14%;
+      right: 14%;
+      top: 22%;
+      height: 10%;
+      border-radius: 999px;
+      background: rgba(226, 232, 240, 0.78);
+      box-shadow:
+        0 1.2rem 0 rgba(148, 163, 184, 0.42),
+        0 2.4rem 0 rgba(148, 163, 184, 0.22);
+      content: "";
+    }
+
+    .thumb-site::before {
+      background:
+        radial-gradient(circle at 72% 30%, rgba(94, 234, 212, 0.52) 0 10%, transparent 10.5%),
+        linear-gradient(180deg, #1e293b 0 22%, transparent 22%),
+        linear-gradient(135deg, #16213d, #223857);
+    }
+
+    footer {
+      max-width: 34rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      body::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .page {
+        padding: 0 3rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      body::before {
+        opacity: 0.8;
+      }
+
+      .page {
+        padding: 3rem 1.5rem;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        position: relative;
+        display: block;
+        max-height: none;
+        min-height: 0;
+        padding: 0;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .social-list {
+        margin-top: 2rem;
+      }
+
+      main {
+        padding: 5rem 0 0;
+      }
+
+      .section {
+        margin-bottom: 5rem;
+        scroll-margin-top: 5rem;
+      }
+
+      .section-heading {
+        display: block;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        padding-inline: 1.5rem;
+      }
+
+      .intro h1 {
+        font-size: 2.5rem;
+      }
+
+      .item,
+      .project-card {
+        display: block;
+      }
+
+      .item::before,
+      .project-card::before {
+        inset: -1rem;
+      }
+
+      .date {
+        margin-bottom: 0.5rem;
+      }
+
+      .project-thumb {
+        width: min(12rem, 100%);
+        margin-bottom: 1rem;
+      }
+
+      .timeline:hover .item,
+      .project-list:hover .project-card {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="page">
+    <div class="layout">
+      <header class="sidebar">
+        <div>
+          <div class="intro">
+            <h1><a href="#top">Mauro Ponce</a></h1>
+            <h2>Ruby on Rails Tech Lead | Software Engineer</h2>
+            <p>I design, modernize, and scale production Rails systems.</p>
+          </div>
+
+          <nav class="nav" aria-label="In-page navigation">
+            <ul>
+              <li><a class="nav-link active" href="#about" aria-current="true">About</a></li>
+              <li><a class="nav-link" href="#experience">Experience</a></li>
+              <li><a class="nav-link" href="#projects">Projects</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <ul class="social-list" aria-label="Social links">
+          <li>
+            <a class="social-link" href="mailto:maurogponce@gmail.com" aria-label="Email Mauro Ponce">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.4l8 5 8-5V7H4Zm0 2.8V17h16V9.8l-7.47 4.67a1 1 0 0 1-1.06 0L4 9.8Z"></path></svg>
+            </a>
+          </li>
+          <li>
+            <a class="social-link" href="https://github.com/mauroponce" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path></svg>
+            </a>
+          </li>
+          <li>
+            <a class="social-link" href="mauro_ponce_resume.pdf" target="_blank" rel="noreferrer noopener" aria-label="Resume">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 2H6v16h11V8h-4V4Zm1 1.4V7h1.6L14 5.4ZM8 11h7v2H8v-2Zm0 4h7v2H8v-2Zm0-8h3v2H8V7Z"></path></svg>
+            </a>
+          </li>
+        </ul>
+      </header>
+
+      <main id="content">
+        <section id="about" class="section" aria-labelledby="about-heading">
+          <h2 id="about-heading" class="section-heading">About</h2>
+          <div class="prose">
+            <p>I&rsquo;m a hands-on technical lead and software engineer with 15+ years of experience building, modernizing, and scaling business-critical web applications. My strongest focus is the Ruby on Rails ecosystem, from long-running legacy platforms to modern Rails 8.1 systems.</p>
+            <p>At <a href="https://www.corefact.com/" target="_blank" rel="noreferrer noopener">Corefact Corporation</a>, I maintain high-traffic production Rails systems and lead <a href="https://ai.corefact.com/" target="_blank" rel="noreferrer noopener">AI Assistant by Corefact</a>, a Rails 8.1 product built with modern Rails practices, OpenAI, Twilio, Stripe, Docker, and AI-assisted engineering workflows.</p>
+            <p>I like working at the point where architecture, delivery, and team health meet: translating business goals into technical roadmaps, reducing operational risk, and helping developers ship with better standards, reviews, tests, and onboarding.</p>
+          </div>
+        </section>
+
+        <section id="experience" class="section" aria-labelledby="experience-heading">
+          <h2 id="experience-heading" class="section-heading">Experience</h2>
+          <ol class="timeline">
+            <li class="item">
+              <div class="date" aria-label="July 2020 to present">Jul 2020 &mdash; Present</div>
+              <div>
+                <h3>
+                  <a class="external" href="https://www.corefact.com/" target="_blank" rel="noreferrer noopener">
+                    Lead Ruby on Rails Developer &middot; Corefact <span class="arrow" aria-hidden="true">&nearr;</span>
+                  </a>
+                </h3>
+                <p>Lead full-stack Rails development across legacy and modern systems. In the last year, owned AI Assistant by Corefact from development through operations using Rails 8.1, Stripe, Docker, Solid Queue, OpenAI API, Twilio, and Pundit while managing deployments, monitoring, project delivery, and a team of four. Partnered with external voice technology providers, shipped OpenAI-powered product features, and used the latest AI tools to accelerate delivery, improve code review, and create advanced frontend UIs.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Ruby on Rails</span></li>
+                  <li><span class="tag">Rails 2.3-8.1</span></li>
+                  <li><span class="tag">PostgreSQL</span></li>
+                  <li><span class="tag">MySQL</span></li>
+                  <li><span class="tag">Redis</span></li>
+                  <li><span class="tag">Solid Queue</span></li>
+                  <li><span class="tag">OpenAI API</span></li>
+                  <li><span class="tag">Twilio</span></li>
+                  <li><span class="tag">Pundit</span></li>
+                  <li><span class="tag">Stripe</span></li>
+                  <li><span class="tag">Docker</span></li>
+                  <li><span class="tag">Deployments</span></li>
+                  <li><span class="tag">Monitoring</span></li>
+                  <li><span class="tag">Astro</span></li>
+                  <li><span class="tag">Mithril.js</span></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="item">
+              <div class="date" aria-label="September 2019 to July 2020">Sept 2019 &mdash; Jul 2020</div>
+              <div>
+                <h3>
+                  <a class="external" href="https://designpickle.com/" target="_blank" rel="noreferrer noopener">
+                    Sr Ruby on Rails Developer &middot; Design Pickle <span class="arrow" aria-hidden="true">&nearr;</span>
+                  </a>
+                </h3>
+                <p>Worked on Design Pickle&rsquo;s creative-as-a-service platform, which helps companies request and manage graphic design, motion, and illustration work. Contributed product features in Rails 5.2 and supported Stripe-powered subscription and billing flows.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Rails 5.2</span></li>
+                  <li><span class="tag">Stripe</span></li>
+                  <li><span class="tag">Product Engineering</span></li>
+                  <li><span class="tag">Subscriptions</span></li>
+                  <li><span class="tag">Web Applications</span></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="item">
+              <div class="date" aria-label="September 2014 to August 2019">Sept 2014 &mdash; Aug 2019</div>
+              <div>
+                <h3>
+                  <a class="external" href="https://www.corefact.com/" target="_blank" rel="noreferrer noopener">
+                    Sr Ruby on Rails Developer &middot; Corefact <span class="arrow" aria-hidden="true">&nearr;</span>
+                  </a>
+                </h3>
+                <p>Worked on Corefact&rsquo;s Rails 2.3 monolith with jQuery, Bootstrap, and Authorize.net payments. Started a new Rails 4 project from scratch using Devise, CanCan, Sidekiq, Redis, RSpec, and Capistrano.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Rails 2.3</span></li>
+                  <li><span class="tag">Rails 4</span></li>
+                  <li><span class="tag">jQuery</span></li>
+                  <li><span class="tag">Bootstrap</span></li>
+                  <li><span class="tag">Authorize.net</span></li>
+                  <li><span class="tag">Devise</span></li>
+                  <li><span class="tag">CanCan</span></li>
+                  <li><span class="tag">Sidekiq</span></li>
+                  <li><span class="tag">Redis</span></li>
+                  <li><span class="tag">RSpec</span></li>
+                  <li><span class="tag">Capistrano</span></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="item">
+              <div class="date" aria-label="June 2012 to August 2014">Jun 2012 &mdash; Aug 2014</div>
+              <div>
+                <h3>
+                  <a class="external" href="https://www.zauberlabs.com/" target="_blank" rel="noreferrer noopener">
+                    Ruby on Rails Developer &middot; Zauber SA <span class="arrow" aria-hidden="true">&nearr;</span>
+                  </a>
+                </h3>
+                <p>Contributed to Flowics, a high-concurrency cloud platform for live broadcast graphics, social media integration, and real-time audience engagement. Built full-stack Rails 3 features and supported enterprise payment integrations.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Ruby on Rails 3</span></li>
+                  <li><span class="tag">Backbone.js</span></li>
+                  <li><span class="tag">Bootstrap</span></li>
+                  <li><span class="tag">Java</span></li>
+                  <li><span class="tag">Hibernate</span></li>
+                  <li><span class="tag">Live Media</span></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="item">
+              <div class="date" aria-label="November 2010 to June 2012">Nov 2010 &mdash; Jun 2012</div>
+              <div>
+                <h3>Java Developer &middot; Cubecorp Software Factory S.A.</h3>
+                <p>Developed enterprise credit account management systems, financial reporting applications, and fraud detection tools with transactional backend components.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Java 6</span></li>
+                  <li><span class="tag">JPA</span></li>
+                  <li><span class="tag">EJB3</span></li>
+                  <li><span class="tag">Web Services</span></li>
+                  <li><span class="tag">Financial Systems</span></li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="item">
+              <div class="date" aria-label="September 2009 to November 2010">Sept 2009 &mdash; Nov 2010</div>
+              <div>
+                <h3>Java Developer &middot; Epidata Consulting S.R.L.</h3>
+                <p>Participated in the reengineering of a core banking compensation system for Banelco, working through requirements analysis, architecture redesign, and technical specification.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Java</span></li>
+                  <li><span class="tag">Banking Systems</span></li>
+                  <li><span class="tag">System Design</span></li>
+                  <li><span class="tag">Requirements Analysis</span></li>
+                </ul>
+              </div>
+            </li>
+          </ol>
+
+          <a class="resume-link" href="mauro_ponce_resume.pdf" target="_blank" rel="noreferrer noopener">View Full R&eacute;sum&eacute; <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </section>
+
+        <section id="projects" class="section" aria-labelledby="projects-heading">
+          <h2 id="projects-heading" class="section-heading">Projects</h2>
+          <ul class="project-list">
+            <li class="project-card">
+              <div class="project-copy">
+                <h3>
+                  <a class="external" href="https://ai.corefact.com/" target="_blank" rel="noreferrer noopener">
+                    AI Assistant by Corefact <span class="arrow" aria-hidden="true">&nearr;</span>
+                  </a>
+                </h3>
+                <p>Owned development and operations for a Rails 8.1 AI assistant that gives print marketing a voice, qualifying leads through conversational flows powered by OpenAI API, Twilio, and external voice technology providers. Used the latest AI tools to accelerate feature delivery, strengthen code review, and design and build advanced frontend UIs.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Rails 8.1</span></li>
+                  <li><span class="tag">OpenAI API</span></li>
+                  <li><span class="tag">Twilio</span></li>
+                  <li><span class="tag">Solid Queue</span></li>
+                  <li><span class="tag">Pundit</span></li>
+                  <li><span class="tag">Stripe</span></li>
+                  <li><span class="tag">Docker</span></li>
+                </ul>
+              </div>
+              <div class="project-thumb project-image">
+                <img src="assets/corefact-ai-home.png" alt="AI Assistant by Corefact homepage screenshot" loading="lazy" decoding="async">
+              </div>
+            </li>
+
+            <li class="project-card">
+              <div class="project-copy">
+                <h3>
+                  <a class="external" href="https://designpickle.com/" target="_blank" rel="noreferrer noopener">
+                    Design Pickle Platform <span class="arrow" aria-hidden="true">&nearr;</span>
+                  </a>
+                </h3>
+                <p>Creative-as-a-service platform for requesting and managing graphic design, motion, and illustration work with subscription billing and product workflows.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Rails 5.2</span></li>
+                  <li><span class="tag">Stripe</span></li>
+                  <li><span class="tag">Subscriptions</span></li>
+                  <li><span class="tag">Product Engineering</span></li>
+                </ul>
+              </div>
+              <div class="project-thumb project-image">
+                <img src="assets/designpickle-home.png" alt="Design Pickle homepage screenshot" loading="lazy" decoding="async">
+              </div>
+            </li>
+
+            <li class="project-card">
+              <div class="project-copy">
+                <h3>
+                  <a class="external" href="https://www.flowics.com/" target="_blank" rel="noreferrer noopener">
+                    Flowics Broadcast Platform <span class="arrow" aria-hidden="true">&nearr;</span>
+                  </a>
+                </h3>
+                <p>Built full-stack features for a high-concurrency cloud platform powering live broadcast graphics, social media integration, and real-time audience engagement.</p>
+                <ul class="tag-list" aria-label="Technologies used">
+                  <li><span class="tag">Rails 3</span></li>
+                  <li><span class="tag">Backbone.js</span></li>
+                  <li><span class="tag">Bootstrap</span></li>
+                  <li><span class="tag">Real-time Media</span></li>
+                </ul>
+              </div>
+              <div class="project-thumb project-video" aria-label="Flowics social media graphics demo video">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="assets/flowics-social-media-graphics-v1.mp4" type="video/mp4">
+                </video>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+
+    window.addEventListener("pointermove", (event) => {
+      root.style.setProperty("--spotlight-x", `${event.clientX}px`);
+      root.style.setProperty("--spotlight-y", `${event.clientY}px`);
+    });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll("video[autoplay]").forEach((video) => {
+        video.removeAttribute("autoplay");
+        video.pause();
+      });
+    }
+
+    const sectionIds = ["about", "experience", "projects"];
+    const navLinks = new Map(
+      sectionIds.map((id) => [id, document.querySelector(`.nav-link[href="#${id}"]`)])
+    );
+
+    const setActiveSection = (id) => {
+      navLinks.forEach((link, key) => {
+        const isActive = key === id;
+        link.classList.toggle("active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "true");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (visible[0]) {
+        setActiveSection(visible[0].target.id);
+      }
+    }, {
+      rootMargin: "-35% 0px -45% 0px",
+      threshold: [0.1, 0.25, 0.5, 0.75]
+    });
+
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) {
+        observer.observe(section);
+      }
+    });
+  </script>
+</body>
+</html>

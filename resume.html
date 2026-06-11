@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mauro Ponce Resume</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      background: #e8edf5;
+      color: #24324a;
+      font-family: Inter, "Avenir Next", Avenir, "Segoe UI", Arial, sans-serif;
+      line-height: 1.28;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .sheet {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.36in 0.48in 0.28in;
+      background: #ffffff;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 2.25in;
+      gap: 0.46in;
+      align-items: start;
+      margin-bottom: 0.22in;
+    }
+
+    h1 {
+      margin: 0 0 0.08in;
+      color: #2453d6;
+      font-size: 32pt;
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .title {
+      margin: 0 0 0.12in;
+      color: #111827;
+      font-size: 10.5pt;
+      font-weight: 800;
+    }
+
+    .summary {
+      max-width: 4.95in;
+      margin: 0;
+      font-size: 8.55pt;
+    }
+
+    .contact {
+      margin-top: 0.05in;
+      color: #24324a;
+      font-size: 8.45pt;
+      font-style: normal;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    .contact a,
+    .boxed {
+      display: inline-block;
+      margin-bottom: 0.026in;
+      border: 1px solid #111827;
+      padding: 0 0.025in;
+      color: #24324a;
+      line-height: 1.1;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 2.38in;
+      gap: 0.4in;
+      align-items: start;
+    }
+
+    section + section {
+      margin-top: 0.14in;
+    }
+
+    h2 {
+      margin: 0 0 0.085in;
+      color: #2453d6;
+      font-size: 12.5pt;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    h3 {
+      margin: 0;
+      color: #111827;
+      font-size: 9.45pt;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .company {
+      font-weight: 800;
+    }
+
+    .date {
+      color: #66758d;
+      font-size: 7.9pt;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .job + .job {
+      margin-top: 0.135in;
+    }
+
+    .job p,
+    .sidebar p {
+      margin: 0.035in 0 0;
+      font-size: 7.95pt;
+    }
+
+    ul {
+      margin: 0.045in 0 0;
+      padding-left: 0.15in;
+    }
+
+    li {
+      margin: 0 0 0.018in;
+      padding-left: 0.02in;
+      font-size: 7.9pt;
+    }
+
+    .sidebar h3 {
+      margin-top: 0.08in;
+      font-size: 8.75pt;
+      font-weight: 800;
+    }
+
+    .sidebar h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .sidebar p {
+      line-height: 1.35;
+    }
+
+    .project {
+      margin-bottom: 0.075in;
+    }
+
+    .project h3 {
+      display: inline;
+      border: 1px solid #111827;
+      padding: 0 0.025in;
+      line-height: 1.1;
+    }
+
+    .project p {
+      margin-top: 0.04in;
+    }
+
+    @media print {
+      html,
+      body {
+        width: 8.5in;
+        min-height: 11in;
+        background: #ffffff;
+      }
+
+      .sheet {
+        width: 8.5in;
+        min-height: 11in;
+        margin: 0;
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet" aria-label="Mauro Ponce resume">
+    <header class="header">
+      <div>
+        <h1>Mauro Ponce</h1>
+        <p class="title">Ruby on Rails Tech Lead | Software Engineer</p>
+        <p class="summary">Hands-on technical lead with 15+ years designing, modernizing, and scaling business-critical web applications. Deep experience guiding long-running Rails systems from legacy versions through Rails 8.1, mentoring teams, and aligning technical roadmaps with business goals.</p>
+      </div>
+      <address class="contact">
+        <span class="boxed">Buenos Aires, Argentina</span><br>
+        <a href="mailto:maurogponce@gmail.com">maurogponce@gmail.com</a><br>
+        <a href="tel:+541160347665">+54 11 6034 7665</a><br>
+        <a href="https://github.com/mauroponce">github.com/mauroponce</a>
+      </address>
+    </header>
+
+    <div class="content">
+      <div>
+        <section>
+          <h2>Relevant Experience</h2>
+
+          <article class="job">
+            <h3>Lead Ruby on Rails Developer &middot; <span class="company">Corefact Corporation</span> <span class="date">July 2020 &mdash; Present</span></h3>
+            <ul>
+              <li>Maintain and scale Corefact&rsquo;s high-traffic Rails 2.3, jQuery, and Bootstrap monolith, preserving stability and backward compatibility while resolving technical debt.</li>
+              <li>Owned AI Assistant by Corefact over the last year, developing and operating a Rails 8.1 product with Stripe, Docker, Solid Queue, OpenAI API, Twilio, Pundit, external voice providers, deployments, monitoring, project management, and a four-person team.</li>
+              <li>Used the latest AI tools to speed delivery, improve code review, build advanced UIs, and ship OpenAI-powered features in Mithril.js and Astro.</li>
+              <li>Introduced Docker-based development and deployment workflows, simplifying infrastructure management and multi-environment consistency.</li>
+              <li>Managed and mentored distributed junior and mid-level developers through code review standards, onboarding, task breakdown, sprint planning, and technical roadmaps.</li>
+              <li>Owned full-stack product development for platforms serving thousands of users with Rails, PostgreSQL, MySQL, Redis, and high-throughput background processing.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Sr Ruby on Rails Developer &middot; <span class="company">Design Pickle</span> <span class="date">Sept 2019 &mdash; July 2020</span></h3>
+            <ul>
+              <li>Worked on Design Pickle&rsquo;s creative-as-a-service platform for requesting and managing graphic design, motion, and illustration work, contributing Rails 5.2 product features and Stripe subscription billing flows.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Sr Ruby on Rails Developer &middot; <span class="company">Corefact Corporation</span> <span class="date">Sept 2014 &mdash; Aug 2019</span></h3>
+            <ul>
+              <li>Worked on Corefact&rsquo;s Rails 2.3 monolith with jQuery, Bootstrap, and Authorize.net payments, supporting production stability for business-critical workflows.</li>
+              <li>Started a new Rails 4 project from scratch using Devise, CanCan, Sidekiq, Redis, RSpec, and Capistrano.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Ruby on Rails Developer &middot; <span class="company">Zauber SA</span> <span class="date">June 2012 &mdash; Aug 2014</span></h3>
+            <ul>
+              <li>Built and scaled Flowics, a high-concurrency cloud platform for live broadcast graphics, social media integration, and real-time audience engagement.</li>
+              <li>Delivered full-stack Rails 3, Backbone.js, and Bootstrap features optimized for low-latency live media experiences.</li>
+              <li>Extended enterprise payment and collection subsystems for GIRE / Rapipago using Java and Hibernate.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Java Developer &middot; <span class="company">Cubecorp Software Factory S.A.</span> <span class="date">Nov 2010 &mdash; June 2012</span></h3>
+            <ul>
+              <li>Maintained enterprise credit account management systems, financial reporting applications, and fraud detection tools.</li>
+              <li>Engineered transactional backend components with Java 6, JPA, EJB3, and Web Services.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Java Developer &middot; <span class="company">Epidata Consulting S.R.L.</span> <span class="date">Sept 2009 &mdash; Nov 2010</span></h3>
+            <ul>
+              <li>Contributed to the reengineering of a core banking compensation system for Banelco, translating complex financial workflows into technical specifications.</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+
+      <aside class="sidebar">
+        <section>
+          <h2>Skills</h2>
+          <h3>Leadership &amp; Process</h3>
+          <p>Technical mentoring, architecture &amp; system design, code reviews, Agile/Scrum, sprint planning, roadmaps, stakeholder communication, onboarding</p>
+
+          <h3>Backend &amp; Architecture</h3>
+          <p>Ruby, Rails 2.3&ndash;8.1, Rails 4, Rails 5.2, Active Record, REST APIs, MVC, Devise, CanCan, Java, Hibernate</p>
+
+          <h3>Data, Jobs &amp; Scale</h3>
+          <p>PostgreSQL, MySQL, Redis, Sidekiq, Solid Queue, Active Job, query optimization, indexing, partitioning</p>
+
+          <h3>Frontend &amp; Modern Rails</h3>
+          <p>Hotwire, Turbo, Stimulus, Tailwind CSS, JavaScript, TypeScript, React, Astro, HTML, CSS, Mithril.js</p>
+
+          <h3>Cloud, DevOps &amp; Testing</h3>
+          <p>Docker, Capistrano, AWS EC2/S3/RDS, GitHub Actions, RSpec, Minitest, Capybara, New Relic, Airbrake, Authorize.net, Stripe, OpenAI API, Twilio, Pundit</p>
+        </section>
+
+        <section>
+          <h2>Selected Projects</h2>
+          <div class="project">
+            <h3>AI Assistant by Corefact</h3>
+            <p>Rails 8.1 AI assistant for print marketing leads with OpenAI API, Twilio, external voice providers, Solid Queue, Pundit, Stripe, Docker, AI-assisted review/UI delivery, deployments, and monitoring.</p>
+          </div>
+          <div class="project">
+            <h3>Corefact Rails Platform</h3>
+            <p>Production Rails 2.3 monolith stewardship plus a new Rails 4 platform with Devise, CanCan, Sidekiq, Redis, RSpec, and Capistrano.</p>
+          </div>
+          <div class="project">
+            <h3>Flowics Platform</h3>
+            <p>High-concurrency live broadcast and social media engagement platform built with Rails 3, Backbone.js, and Bootstrap.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Education</h2>
+          <h3>Universidad Argentina de la Empresa (UADE)</h3>
+          <p>Software Engineering Degree, 2008 &mdash; 2016</p>
+          <h3>Languages &amp; Certification</h3>
+          <p>Spanish: Native<br>English: Upper-intermediate<br>Cambridge First Certificate in English (FCE)</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
