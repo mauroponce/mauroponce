@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A GitHub Flavored Markdown reference for HTTP cookies in Rails.">
+  <title>HTTP Cookies in Rails · Mauro Ponce</title>
+  <style>
+    :root { --ink: #1f2328; --muted: #57606a; --line: #d0d7de; --link: #0969da; --code: #f6f8fa; --dark: #0d1117; } * { box-sizing: border-box; } body { margin: 0; color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; } a { color: var(--link); } a:focus-visible { outline: 3px solid #80ccff; outline-offset: 3px; } .shell { width: min(100% - 2rem, 54rem); margin: 0 auto; } .site-header { border-bottom: 1px solid var(--line); padding: 1rem 0; } .site-header .shell { display: flex; justify-content: space-between; gap: 1rem; } .brand { color: var(--ink); font-weight: 700; text-decoration: none; } nav { display: flex; gap: 1rem; font-size: .9rem; } article { padding: 3rem 0 5rem; } h1, h2 { line-height: 1.25; } h1 { margin: 0 0 1.1rem; padding-bottom: .3rem; border-bottom: 1px solid var(--line); font-size: 2rem; } h2 { margin-top: 2rem; padding-bottom: .3rem; border-bottom: 1px solid var(--line); font-size: 1.45rem; } code { border-radius: 4px; background: var(--code); padding: .12em .3em; font: .85em ui-monospace, SFMono-Regular, Consolas, monospace; } pre { overflow-x: auto; margin: 1rem 0; border-radius: 6px; background: var(--dark); padding: 1rem; color: #e6edf3; font: 14px/1.45 ui-monospace, SFMono-Regular, Consolas, monospace; } pre code { padding: 0; background: transparent; color: inherit; } li + li { margin-top: .35rem; } .source { margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 1rem; color: var(--muted); font-size: .9rem; } footer { border-top: 1px solid var(--line); padding: 1.5rem 0; color: var(--muted); font-size: .9rem; } @media (max-width: 34rem) { .site-header .shell { align-items: flex-start; flex-direction: column; } article { padding-top: 2.2rem; } }
+  </style>
+  <link rel="stylesheet" href="../article.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-ruby.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+</head>
+<body class="article-page">
+  <header class="site-header"><div class="shell"><a class="brand" href="../../index.html">Mauro Ponce</a><nav aria-label="Site navigation"><a href="../../index.html">Portfolio</a><a href="../index.html">Blog</a></nav></div></header>
+  <main id="content" class="shell article-shell article-layout">
+    <nav class="topic-index" aria-label="Blog folders">
+      <ul>
+        <li><a href="../solid-queue/index.html">Solid Queue</a></li>
+        <li><a href="../cookies/index.html" aria-current="page">Cookies</a></li>
+        <li><a href="../cache/index.html">Cache</a></li>
+        <li><a href="../metaprogramming/index.html">Metaprogramming</a></li>
+      </ul>
+    </nav>
+    <article class="article-content">
+    <h1>HTTP cookies in Rails</h1>
+    <h2>What cookies do</h2><ul><li>Cookies are small key-value values stored by the browser.</li><li>The browser sends matching cookies with future requests to the same domain/path.</li><li>Rails exposes cookies through the <code>cookies</code> helper.</li></ul>
+    <h2>Basic usage</h2><pre class="language-ruby"><code class="language-ruby">cookies[:theme] = "dark"&#10;cookies[:theme] # "dark"</code></pre>
+    <h2>Cookie options</h2><pre class="language-ruby"><code class="language-ruby">cookies[:locale] = {&#10;  value: "en",&#10;  expires: 1.year.from_now,&#10;  httponly: true,&#10;  secure: Rails.env.production?,&#10;  same_site: :lax&#10;}</code></pre>
+    <h2>Signed cookies</h2><ul><li>Prevent tampering.</li><li>Useful when the value does not need to be secret but must be trusted.</li></ul><pre class="language-ruby"><code class="language-ruby">cookies.signed[:user_id] = current_user.id&#10;cookies.signed[:user_id]</code></pre>
+    <h2>Encrypted cookies</h2><ul><li>Prevent reading and tampering.</li><li>Useful for small sensitive values, though sessions are often better for login state.</li></ul><pre class="language-ruby"><code class="language-ruby">cookies.encrypted[:return_to] = request.fullpath&#10;cookies.encrypted[:return_to]</code></pre>
+    <h2>Permanent cookies</h2><pre class="language-ruby"><code class="language-ruby">cookies.permanent.signed[:remember_user_id] = current_user.id</code></pre>
+    <h2>Deleting cookies</h2><pre class="language-ruby"><code class="language-ruby">cookies.delete(:theme)</code></pre>
+    <h2>Security notes</h2><ul><li>Use <code>httponly</code> to block JavaScript access where possible.</li><li>Use <code>secure</code> in production so cookies are only sent over HTTPS.</li><li>Use <code>same_site</code> to reduce cross-site request risks.</li><li>Do not put secrets in plain cookies.</li></ul>
+    <h2>Interview notes</h2><ul><li>Sessions in Rails are often implemented with encrypted cookies.</li><li>Signed means integrity; encrypted means confidentiality plus integrity.</li><li>Cookies are sent on every matching request, so keep them small.</li></ul>
+    <p class="source">This page is rendered from the accompanying <a href="cookies.md">GitHub Flavored Markdown source</a>. Its fenced <code>ruby</code> snippets remain semantic, scrollable code blocks in the local preview.</p>
+    </article>
+  </main>
+  <footer><div class="shell">© 2026 Mauro Ponce</div></footer>
+</body>
+</html>

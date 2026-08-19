@@ -1,0 +1,107 @@
+:root {
+  --article-ink: #172033;
+  --article-muted: #526078;
+  --article-line: #d8e0eb;
+  --article-accent: #175cd3;
+  --article-wash: #f5f8fc;
+}
+
+body.article-page {
+  background: var(--article-wash);
+  color: var(--article-ink);
+}
+
+.article-page .site-header,
+.article-page footer {
+  border-color: var(--article-line);
+}
+
+.article-page .article-shell {
+  width: min(100% - 2rem, 70rem);
+}
+
+.article-page .article-layout {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.article-page .topic-index {
+  align-self: start;
+  position: sticky;
+  top: 1.5rem;
+  padding-top: 3.8rem;
+}
+
+.article-page .topic-index h2 {
+  margin: 0 0 0.7rem;
+  color: var(--article-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.article-page .topic-index ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--article-line);
+}
+
+.article-page .topic-index a {
+  display: block;
+  padding: 0.38rem 0 0.38rem 1rem;
+  color: var(--article-muted);
+  font-size: 0.94rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.article-page .topic-index a:hover,
+.article-page .topic-index a[aria-current="page"] {
+  color: var(--article-accent);
+}
+
+.article-page .brand {
+  color: var(--article-ink);
+}
+
+.article-page article {
+  padding: 3.5rem 0 5rem;
+}
+
+.article-page h1,
+.article-page h2,
+.article-page h3 {
+  color: var(--article-ink);
+}
+
+.article-page pre[class*="language-"],
+.article-page code[class*="language-"] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-shadow: none;
+}
+
+.article-page pre[class*="language-"] {
+  margin: 1.25rem 0;
+  border: 1px solid #30363d;
+  border-radius: 0.6rem;
+  padding: 1.15rem 1.25rem;
+  tab-size: 2;
+}
+
+.article-page :not(pre) > code {
+  border-radius: 0.25rem;
+  background: #eaf0f8;
+  padding: 0.1rem 0.28rem;
+  color: #293a55;
+}
+
+@media (max-width: 34rem) {
+  .article-page .article-layout { display: block; }
+  .article-page .topic-index { position: static; margin: 2rem 0 0; padding: 0; }
+  .article-page .topic-index ul { display: flex; flex-wrap: wrap; gap: 0.35rem; border: 0; }
+  .article-page .topic-index a { border: 1px solid var(--article-line); border-radius: 999px; padding: 0.28rem 0.7rem; }
+  .article-page article { padding-top: 2.75rem; }
+  .article-page pre[class*="language-"] { margin-left: -0.2rem; margin-right: -0.2rem; border-radius: 0.35rem; }
+}

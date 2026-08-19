@@ -41,17 +41,32 @@
     footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; padding: 1.5rem 0 2rem; }
     @media (max-width: 34rem) { .site-header .shell { align-items: flex-start; flex-direction: column; } article { padding-top: 2.75rem; } pre { margin-left: -0.2rem; margin-right: -0.2rem; border-radius: 0.35rem; } }
   </style>
+  <link rel="stylesheet" href="../article.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-ruby.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
 </head>
-<body>
+<body class="article-page">
   <a class="skip-link" href="#content">Skip to article</a>
   <header class="site-header">
     <div class="shell">
-      <a class="brand" href="../index.html">Mauro Ponce</a>
-      <nav aria-label="Site navigation"><a href="../index.html">Portfolio</a><a href="index.html">Blog</a></nav>
+      <a class="brand" href="../../index.html">Mauro Ponce</a>
+      <nav aria-label="Site navigation"><a href="../../index.html">Portfolio</a><a href="../index.html">Blog</a></nav>
     </div>
   </header>
-  <main id="content" class="shell">
-    <article>
+  <main id="content" class="shell article-shell article-layout">
+    <nav class="topic-index" aria-label="Blog folders">
+      <ul>
+        <li><a href="../solid-queue/index.html" aria-current="page">Solid Queue</a></li>
+        <li><a href="../cookies/index.html">Cookies</a></li>
+        <li><a href="../cache/index.html">Cache</a></li>
+        <li><a href="../metaprogramming/index.html">Metaprogramming</a></li>
+      </ul>
+    </nav>
+    <article class="article-content">
       <header>
         <p class="eyebrow">Ruby on Rails · Background jobs</p>
         <h1>Solid Queue in Rails 8.1: A Practical Guide to Database-Backed Jobs</h1>
@@ -65,10 +80,10 @@
 
       <h2>Set up a queue database</h2>
       <p>New Rails 8 applications include the Solid Queue wiring in production. Enabling the same adapter locally gives development behavior that more closely resembles production. A dedicated queue database is the default and is usually the safer boundary: job traffic does not compete as directly with primary application tables, and application code does not accidentally depend on cross-database transactional behavior.</p>
-      <pre><code># config/environments/development.rb
+      <pre class="language-ruby"><code class="language-ruby"># config/environments/development.rb
 config.active_job.queue_adapter = :solid_queue
 config.solid_queue.connects_to = { database: { writing: :queue } }</code></pre>
-      <pre><code># config/database.yml
+      <pre class="language-yaml"><code class="language-yaml"># config/database.yml
 development:
   primary:
     &lt;&lt;: *default
@@ -78,13 +93,13 @@ development:
     database: storage/development_queue.sqlite3
     migrations_paths: db/queue_migrate</code></pre>
       <p>For PostgreSQL or MySQL, use the same pattern with a separate queue database and credentials appropriate to that environment. Prepare its tables and start the supervisor:</p>
-      <pre><code>bin/rails db:prepare
+      <pre class="language-bash"><code class="language-bash">bin/rails db:prepare
 bin/jobs start</code></pre>
       <p>The generated queue schema contains the tables Solid Queue uses to move work through its lifecycle. Your deploy should run database preparation before workers begin accepting jobs.</p>
 
       <h2>Write jobs with Active Job</h2>
       <p>The application code remains ordinary Active Job. Pass records or simple serializable arguments, make the work safe to retry, and choose an explicit queue for work that deserves a separate service level.</p>
-      <pre><code># app/jobs/generate_report_job.rb
+      <pre class="language-ruby"><code class="language-ruby"># app/jobs/generate_report_job.rb
 class GenerateReportJob &lt; ApplicationJob
   queue_as :reports
   queue_with_priority 25
@@ -100,7 +115,7 @@ class GenerateReportJob &lt; ApplicationJob
     report.generate!
   end
 end</code></pre>
-      <pre><code># Run now, later, or at a specific time.
+      <pre class="language-ruby"><code class="language-ruby"># Run now, later, or at a specific time.
 GenerateReportJob.perform_later(report)
 GenerateReportJob.set(wait: 5.minutes).perform_later(report)
 GenerateReportJob.set(wait_until: tomorrow.noon).perform_later(report)</code></pre>
@@ -108,7 +123,7 @@ GenerateReportJob.set(wait_until: tomorrow.noon).perform_later(report)</code></p
 
       <h2>Configure workers, queues, and priorities</h2>
       <p><code>config/queue.yml</code> describes the processes that dispatch future work and the workers that execute ready work. Queue order comes before numeric job priority, so reserve earlier queues for work that must not wait behind bulk jobs.</p>
-      <pre><code># config/queue.yml
+      <pre class="language-yaml"><code class="language-yaml"># config/queue.yml
 production:
   dispatchers:
     - polling_interval: 1
@@ -122,7 +137,7 @@ production:
 
       <h2>Schedule recurring work</h2>
       <p>Recurring tasks live in <code>config/recurring.yml</code>. Use them for cleanup, periodic synchronization, or scheduled reports, and keep the job implementation idempotent in case a deploy or operator action causes a run to be repeated.</p>
-      <pre><code># config/recurring.yml
+      <pre class="language-yaml"><code class="language-yaml"># config/recurring.yml
 production:
   prune_expired_reports:
     class: PruneExpiredReportsJob
@@ -135,7 +150,7 @@ production:
 
       <h2>Understand transaction boundaries</h2>
       <p>A separate queue database means the job insert cannot be part of the primary database transaction. In most applications, explicitly deferring enqueueing until the surrounding transaction commits is a clearer and more portable rule:</p>
-      <pre><code># app/jobs/application_job.rb
+      <pre class="language-ruby"><code class="language-ruby"># app/jobs/application_job.rb
 class ApplicationJob &lt; ActiveJob::Base
   self.enqueue_after_transaction_commit = true
 end</code></pre>

@@ -36,6 +36,22 @@
     .tags li { border-radius: 999px; background: #e8f0fe; color: #164a9f; padding: 0.25rem 0.65rem; font-size: 0.8rem; font-weight: 700; }
     footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; padding: 1.5rem 0 2rem; }
     @media (max-width: 34rem) { .site-header .shell { align-items: flex-start; flex-direction: column; } main { padding-top: 3rem; } }
+
+    .blog-shell { width: min(100% - 2rem, 70rem); margin: 0 auto; }
+    .blog-layout { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); padding: 4.5rem 0 5rem; }
+    .topic-index { align-self: start; position: sticky; top: 1.5rem; }
+    .topic-index h2 { margin: 0 0 0.7rem; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .topic-index ul { margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); }
+    .topic-index a { display: block; padding: 0.38rem 0 0.38rem 1rem; color: var(--muted); font-size: 0.94rem; font-weight: 650; text-decoration: none; }
+    .topic-index a:hover { color: var(--accent); }
+    .blog-layout .intro { margin-bottom: 2.7rem; }
+
+    @media (max-width: 42rem) {
+      .blog-layout { display: block; padding-top: 3rem; }
+      .topic-index { position: static; margin: 0 0 2.5rem; }
+      .topic-index ul { display: flex; flex-wrap: wrap; gap: 0.35rem; border: 0; }
+      .topic-index a { border: 1px solid var(--line); border-radius: 999px; padding: 0.28rem 0.7rem; }
+    }
   </style>
 </head>
 <body>
@@ -46,19 +62,22 @@
       <nav aria-label="Site navigation"><a href="../index.html">Portfolio</a><a href="index.html" aria-current="page">Blog</a></nav>
     </div>
   </header>
-  <main id="content" class="shell">
-    <p class="eyebrow">Programming notes</p>
-    <p class="intro">Writing about Ruby on Rails, background jobs, system design, and the work of taking an application from idea to reliable production software.</p>
-    <ul class="post-list">
-      <li class="post-card">
-        <article>
-          <h2><a href="solid-queue-rails-8-1.html">Solid Queue in Rails 8.1: A Practical Guide to Database-Backed Jobs</a></h2>
-          <p class="meta"><time datetime="2026-08-19">August 19, 2026</time> · 12 min read</p>
-          <p>Set up durable background jobs without Redis, configure workers and queues, schedule recurring work, and operate Solid Queue safely in production.</p>
-          <ul class="tags" aria-label="Topics"><li>Ruby on Rails</li><li>Rails 8.1</li><li>Solid Queue</li><li>Background Jobs</li></ul>
-        </article>
-      </li>
-    </ul>
+  <main id="content" class="blog-shell blog-layout">
+    <nav class="topic-index" aria-label="Blog folders">
+      <ul>
+        <li><a href="solid-queue/index.html">Solid Queue</a></li>
+        <li><a href="cookies/index.html">Cookies</a></li>
+        <li><a href="cache/index.html">Cache</a></li>
+        <li><a href="metaprogramming/index.html">Metaprogramming</a></li>
+      </ul>
+    </nav>
+    <section aria-labelledby="blog-heading">
+      <p class="eyebrow">Programming notes</p>
+      <ul class="post-list">
+        <li class="post-card"><article><h2><a href="solid-queue/index.html">Solid Queue in Rails 8.1: A Practical Guide to Database-Backed Jobs</a></h2><p class="meta"><time datetime="2026-08-19">August 19, 2026</time> · 12 min read</p><p>Set up durable background jobs without Redis, configure workers and queues, schedule recurring work, and operate Solid Queue safely in production.</p><ul class="tags" aria-label="Topics"><li>Ruby on Rails</li><li>Rails 8.1</li><li>Solid Queue</li></ul></article></li>
+        <li class="post-card"><article><h2><a href="cookies/index.html">HTTP Cookies in Rails</a></h2><p class="meta">Reference note · 5 min read</p><p>A practical reference for creating, signing, encrypting, expiring, and deleting cookies safely in Rails.</p><ul class="tags" aria-label="Topics"><li>HTTP</li><li>Rails</li><li>Security</li></ul></article></li>
+      </ul>
+    </section>
   </main>
   <footer><div class="shell">© 2026 Mauro Ponce</div></footer>
 </body>
